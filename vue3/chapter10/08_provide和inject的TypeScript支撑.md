@@ -8,8 +8,8 @@ App.vue
 
 ```vue {2,16-29,33-34}
 <script setup lang="ts">
-import { provide, ref } from 'vue';
-import HelloWorld from './components/HelloWorld.vue';
+import { provide, ref } from "vue";
+import HelloWorld from "./components/HelloWorld.vue";
 const helloWorldModal = ref<InstanceType<typeof HelloWorld> | null>(null);
 const toggleHellWorldModal = () => {
   helloWorldModal.value?.toggle();
@@ -24,15 +24,15 @@ interface User {
   age: number;
 }
 // 设置响应式数据user，数据类型为User接口类型，并设置初始值
-const user = ref<User>({ name: '硅谷', age: 6 });
+const user = ref<User>({ name: "硅谷", age: 6 });
 // 设置setUser方法，参数为User接口类型并进行解构赋值，函数返回类型void
 const setUser = ({ name, age }: User): void => {
   user.value.name = name;
   user.value.age = age;
 };
 // 利用provide将user和setUser方法注入到组件中
-provide('user', user);
-provide('setUser', setUser);
+provide("user", user);
+provide("setUser", setUser);
 </script>
 
 <template>
@@ -63,13 +63,13 @@ components/Grandson.vue
 </template>
 
 <script setup lang="ts">
-import { inject } from 'vue';
+import { inject } from "vue";
 // 利用inject将user和setUser方法注入到组件中
-const user = inject('user');
-const setUser = inject('setUser');
+const user = inject("user");
+const setUser = inject("setUser");
 // 添加changeUser方法，将调用setUser方法，并传入参数
 const changeUser = () => {
-  setUser({ name: '硅谷', age: 10 });
+  setUser({ name: "硅谷", age: 10 });
 };
 </script>
 ```
@@ -82,8 +82,8 @@ const changeUser = () => {
 
 ```vue {2-3,91-104,108}
 <script setup lang="ts">
-import Grandson from './GrandSon.vue';
-import { ref, nextTick, computed, watch, provide } from 'vue';
+import Grandson from "./GrandSon.vue";
+import { ref, nextTick, computed, watch, provide } from "vue";
 // 设置input输入框ref对象
 const ipt = ref<HTMLInputElement | null>(null);
 const count = ref<number>(0);
@@ -165,10 +165,10 @@ const props = withDefaults(defineProps<Props>(), {
 });
 
 const emit = defineEmits<{
-  (e: 'changeFn', emitObj: { id: number; value: string }): void;
+  (e: "changeFn", emitObj: { id: number; value: string }): void;
 }>();
 const changeParentEmit = () => {
-  emit('changeFn', { id: 1, value: '我是子组件传递过来的值' });
+  emit("changeFn", { id: 1, value: "我是子组件传递过来的值" });
 };
 
 interface User {
@@ -176,15 +176,15 @@ interface User {
   age: number;
 }
 // 设置响应式数据user，数据类型为User接口类型，并设置初始值
-const user = ref<User>({ name: '硅谷', age: 14 });
+const user = ref<User>({ name: "硅谷", age: 14 });
 // 设置setUser方法，参数为User接口类型并进行解构赋值，函数返回类型void
 const setUser = ({ name, age }: User): void => {
   user.value.name = name;
   user.value.age = age;
 };
 // 利用provide将user和setUser方法注入到组件中
-provide('user', user);
-provide('setUser', setUser);
+provide("user", user);
+provide("setUser", setUser);
 </script>
 
 <template>
@@ -223,8 +223,8 @@ provide('setUser', setUser);
 然后回来考虑为什么会产生现在 unknow 的错误信息？这是因为在 inject 注入的时候我们注入的是 user、setUser 这两个数据与方法内容，虽然现在 App.vue 主组件中进行了数据的定义与 provide 的提供，但是在 Grandson.vue 的父组件 HelloWorld.vue 中是否还会定义？因为 App.vue 是属于爷爷级别的组件，事实上 HelloWorld.vue 这个父亲级别的组件也可以定义 user 以及 setUser，也可以进行 provide 的提供，那么作为孙级的 Grandson.vue 是否能够清楚到底应该接收的是哪一个？确实是不清楚的。
 
 ```typescript
-const user = inject('user'); // 到底接收的是App还是HelloWorld的user？
-const setUser = inject('setUser'); // 到底接收的是App还是HelloWorld的setUser？
+const user = inject("user"); // 到底接收的是App还是HelloWorld的user？
+const setUser = inject("setUser"); // 到底接收的是App还是HelloWorld的setUser？
 ```
 
 那么如何才能对 provide 提供与 inject 注入的内容进行唯一性识别呢？可以想办法给他们设置一定的唯一标识。这时候就可以用 InjectionKey 来定义类型，确保父传出去的值和子接收到的值类型是一样的。
@@ -238,7 +238,7 @@ const setUser = inject('setUser'); // 到底接收的是App还是HelloWorld的se
 然后声明 userKey 以及 setUserKey，利用 InjectionKey 接口，指定注入的 key 值，再利用 Symbol 类型，指定并初始化 key 值的类型与初始值，因为 Symbol 会产生唯一的标识。
 
 ```typescript
-import { InjectionKey, Ref, ref } from 'vue';
+import { InjectionKey, Ref, ref } from "vue";
 // 定义用户接口数据类型
 export interface User {
   name: string;
@@ -247,18 +247,18 @@ export interface User {
 // 定义SetUser函数字面量类型，函数参数为User类型，返回值为void类型
 export type SetUser = (user: User) => void;
 // 设置userKey，利用InjectionKey接口，指定注入的key值，利用Symbol类型，指定并初始化key值的类型与初始值
-export const userKey: InjectionKey<Ref<User>> = Symbol('');
+export const userKey: InjectionKey<Ref<User>> = Symbol("");
 // 设置setUserKey，利用InjectionKey接口，指定注入的key值，利用Symbol类型，指定并初始化key值的类型与初始值
-export const setUserKey: InjectionKey<SetUser> = Symbol('');
+export const setUserKey: InjectionKey<SetUser> = Symbol("");
 ```
 
 现在修改 App.vue，将 provideInjectType 中的 userKey、setUserKey、 User、 SetUser 等内容进行导入，然后删除 User 接口定义，可以将 user 以及 setUser 进行数据类型的明确，并且在 provide 中利用 userKey 与 setUserKey 进行唯一性 key 值的设置。
 
 ```vue {3,17,22,27-28}
 <script setup lang="ts">
-import { provide, ref } from 'vue';
-import { userKey, setUserKey, User, SetUser } from './types/provideInjectType';
-import HelloWorld from './components/HelloWorld.vue';
+import { provide, ref } from "vue";
+import { userKey, setUserKey, User, SetUser } from "./types/provideInjectType";
+import HelloWorld from "./components/HelloWorld.vue";
 const helloWorldModal = ref<InstanceType<typeof HelloWorld> | null>(null);
 const toggleHellWorldModal = () => {
   helloWorldModal.value?.toggle();
@@ -271,7 +271,7 @@ const changeFnCallback = (emitObj: { id: number; value: string }) => {
 // 删除User接口定义
 
 // 设置响应式数据user，数据类型为User接口类型，并设置初始值
-const user = ref<User>({ name: '硅谷', age: 6 });
+const user = ref<User>({ name: "硅谷", age: 6 });
 // 设置setUser方法，参数为User接口类型并进行解构赋值，函数返回类型void
 const setUser: SetUser = ({ name, age }: User): void => {
   user.value.name = name;
@@ -306,14 +306,14 @@ provide(setUserKey, setUser);
 </template>
 
 <script setup lang="ts">
-import { inject } from 'vue';
-import { userKey, setUserKey } from '../types/provideInjectType';
+import { inject } from "vue";
+import { userKey, setUserKey } from "../types/provideInjectType";
 // 利用inject将user和setUser方法注入到组件中
 const user = inject(userKey);
 const setUser = inject(setUserKey);
 // 添加changeUser方法，将调用setUser方法，并传入参数
 const changeUser = () => {
-  setUser?.({ name: '硅谷', age: 10 });
+  setUser?.({ name: "硅谷", age: 10 });
 };
 </script>
 ```

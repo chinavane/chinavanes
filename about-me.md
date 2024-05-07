@@ -4,7 +4,7 @@ sidebar: false
 aside: true
 ---
 
-<img src="/images/hero.png" width="100%" />
+<img src="/public/hero.png" width="100%" />
 
 # 关于我-子心
 

@@ -4,7 +4,7 @@ aside: false
 
 # URL 的组成
 
-![URL 的组成](/images/url-structor.png)
+![URL 的组成](/public/url-structor.png)
 
 本知识频道专注于深入剖析统一资源定位符（URL）的构成及其在项目开发中的核心作用，旨在为开发者提供一个系统性的学习路径，帮助理解 URL 这一互联网基石的方方面面。以下是频道内容概览：
 

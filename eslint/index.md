@@ -4,7 +4,7 @@ aside: false
 
 # ESLint 起步教程
 
-![ESLint 起步教程](/images/eslint.webp)
+![ESLint 起步教程](/public/eslint.webp)
 
 本知识频道专注于 ESLint——这一强大的 JavaScript 代码质量工具的全方位教程，旨在帮助开发者从入门到精通，有效提升代码质量和团队协作效率。频道内容循序渐进，覆盖了 ESLint 的安装配置、规则定制、自动化修复、插件开发与应用等关键环节，特别适合 JavaScript 项目开发者以及想要深入了解代码规范化的技术爱好者。下面是频道的概括性总结：
 

@@ -4,7 +4,7 @@ aside: false
 
 # Sass 起步教程
 
-![Sass起步教程](/images/sass-intro.png)
+![Sass起步教程](/public/sass-intro.png)
 
 本知识频道致力于为初学者提供一套全面且细致的 SASS（Syntactically Awesome Stylesheets）学习指南，从基础概念到高级应用，旨在帮助开发者掌握 SASS 这一强大的 CSS 预处理器，从而提升 CSS 编写效率，增强样式管理的灵活性与可维护性。以下是频道内容的概括：
 

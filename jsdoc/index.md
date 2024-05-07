@@ -4,7 +4,7 @@ aside: false
 
 # JSDoc 注释文档生成利器
 
-![JSDoc 注释文档生成利器](/images/jsdoc.webp)
+![JSDoc 注释文档生成利器](/public/jsdoc.webp)
 
 本知识频道致力于全面介绍和指导如何高效利用 JSDoc 来创建和维护高质量的 JavaScript 代码文档。JSDoc 作为一种强大的文档生成工具，能够根据特殊格式的注释自动生成详细的 API 文档，极大地提高了开发效率和代码可维护性。以下是该频道的概览和各部分内容的总结：
 

@@ -36,17 +36,17 @@ index.html
 vite.config.js
 
 ```js
-import { defineConfig } from 'vite';
-import vue from '@vitejs/plugin-vue';
-const { resolve } = require('path');
+import { defineConfig } from "vite";
+import vue from "@vitejs/plugin-vue";
+const { resolve } = require("path");
 
 // https://vitejs.dev/config/
 export default defineConfig({
   plugins: [vue()],
   // 设置别名与后缀
   resolve: {
-    alias: [{ find: '@', replacement: resolve(__dirname, 'src') }],
-    extensions: ['.mjs', '.js', '.ts', '.jsx', '.tsx', '.json', '.vue'],
+    alias: [{ find: "@", replacement: resolve(__dirname, "src") }],
+    extensions: [".mjs", ".js", ".ts", ".jsx", ".tsx", ".json", ".vue"],
   },
 });
 ```
@@ -57,7 +57,7 @@ components/Child1.vue
 
 ```vue
 <script setup>
-import Grandson from '@/components/Grandson';
+import Grandson from "@/components/Grandson";
 </script>
 
 <template>
@@ -100,8 +100,8 @@ App.vue
 
 ```vue
 <script setup>
-import Child1 from '@/components/Child1';
-import Child2 from '@/components/Child2';
+import Child1 from "@/components/Child1";
+import Child2 from "@/components/Child2";
 </script>
 
 <template>
@@ -129,13 +129,13 @@ import Child2 from '@/components/Child2';
 npm install vuex --save
 ```
 
-安装完vuex插件以后先不着急进行仓库模块的具体代码编写，可以根据之前vuex层次结构与流程走向规划一下当前项目的目标功能。
+安装完 vuex 插件以后先不着急进行仓库模块的具体代码编写，可以根据之前 vuex 层次结构与流程走向规划一下当前项目的目标功能。
 
-- 在子组件2中需要直接渲染vuex仓库中的state状态值count(vuex的state值设置与Vue Components组件渲染)；
-- 在子组件2中需要利用getters计算属性的方式获取加倍count值doubleCount(vuex的getters计算返回与Vue Components组件getters计算获取)；
-- 在孙级组件中需要利用“同步count加1”按钮commit提交mutations中的同步修改state状态方法进行count值加1操作(vuex的mutations修改的定义与Vue Components组件提交mutations修改函数执行)；
-- 在孙级组件中需要利用“异步count加N”按钮dispatch派发actions中的异步动作，并且需要传递异步累加count的步长值进行指定参数的count累加操作(vuex的actions异步的定义与Vue Components组件派发actions异步函数执行)；
-- 在孙级组件中需要利用“异步count减N”按钮dispatch派发actions中的异步动作，并且需要传递异步累加count的步长值对象进行指定参数的count递减操作，还需要将actions动作执行结果进行Promise返回让组件中可以进行Promise结果的获取(vuex的actions异步的定义和异步函数结果Promise结果形式的返回以及Vue Components组件派发actions异步函数执行和Promise结果的获取)。
+- 在子组件 2 中需要直接渲染 vuex 仓库中的 state 状态值 count(vuex 的 state 值设置与 Vue Components 组件渲染)；
+- 在子组件 2 中需要利用 getters 计算属性的方式获取加倍 count 值 doubleCount(vuex 的 getters 计算返回与 Vue Components 组件 getters 计算获取)；
+- 在孙级组件中需要利用“同步 count 加 1”按钮 commit 提交 mutations 中的同步修改 state 状态方法进行 count 值加 1 操作(vuex 的 mutations 修改的定义与 Vue Components 组件提交 mutations 修改函数执行)；
+- 在孙级组件中需要利用“异步 count 加 N”按钮 dispatch 派发 actions 中的异步动作，并且需要传递异步累加 count 的步长值进行指定参数的 count 累加操作(vuex 的 actions 异步的定义与 Vue Components 组件派发 actions 异步函数执行)；
+- 在孙级组件中需要利用“异步 count 减 N”按钮 dispatch 派发 actions 中的异步动作，并且需要传递异步累加 count 的步长值对象进行指定参数的 count 递减操作，还需要将 actions 动作执行结果进行 Promise 返回让组件中可以进行 Promise 结果的获取(vuex 的 actions 异步的定义和异步函数结果 Promise 结果形式的返回以及 Vue Components 组件派发 actions 异步函数执行和 Promise 结果的获取)。
 
 ![image-20221119082806698](http://qn.chinavanes.com/qiniu_picGo/image-20221119082806698.png)
 
@@ -143,19 +143,19 @@ npm install vuex --save
 
 在这个仓库中可以设置 state 状态内容，它是函数数据类型，可以返回一个对象，目前该对象中只包含一个状态值也就是 count，默认值设置为 0。
 
-获取数据getters中可以设置一个multiCount函数，函数的参数是state，因为需要对state原状态值进行计算处理，当前直接return返回的是对state.count进行乘法2的计算结果值，这样在组件在进行getters的multiCount方法调用时直接将返回2倍的count值。
+获取数据 getters 中可以设置一个 multiCount 函数，函数的参数是 state，因为需要对 state 原状态值进行计算处理，当前直接 return 返回的是对 state.count 进行乘法 2 的计算结果值，这样在组件在进行 getters 的 multiCount 方法调用时直接将返回 2 倍的 count 值。
 
-修改数据mutations同样是对state进行状态值的修改处理，所以mutations对象节点中的函数参数里也都是state为第一参数，而state中有count这一属性值，所以可以设置increment递增函数直接对state.count++进行count值的累计加1操作。除此之外，mutations中的函数还可以接收payload有效载荷的参数，该参数可以是任意数据类型，比如直接是数值型，那么multiIncrement函数中对state.count进行累加N操作时payload就是那个N值，但假若数据类型是对象型，那么multiDecrement函数中对state.count进行递减N操作时payload就是那个payload.step的对象属性值。
+修改数据 mutations 同样是对 state 进行状态值的修改处理，所以 mutations 对象节点中的函数参数里也都是 state 为第一参数，而 state 中有 count 这一属性值，所以可以设置 increment 递增函数直接对 state.count++进行 count 值的累计加 1 操作。除此之外，mutations 中的函数还可以接收 payload 有效载荷的参数，该参数可以是任意数据类型，比如直接是数值型，那么 multiIncrement 函数中对 state.count 进行累加 N 操作时 payload 就是那个 N 值，但假若数据类型是对象型，那么 multiDecrement 函数中对 state.count 进行递减 N 操作时 payload 就是那个 payload.step 的对象属性值。
 
-异步操作actions主要是对mutations进行commit提交操作，因为不建议在mutations层进行异步处理，所以可以在actions层先进行异步功能，然后需要修改数据的时候将数据通过payload的参数形式commit到mutations的修改数据方法中，所以actions中的asyncMultiIncrement方法中主要参数包括了context上下文以及payload有效载荷参数，context上下文对象中包含commit、dispatch、getters、rootGetters、rootState、state等方法与属性，那么就可以利用context.commit进行multiIncrement这一mutations方法的提交，并且将payload作为参数一同传递。至于asyncMultiDecrement这个actions动作中可以直接将commit方法从context中解构，并且利用return new Promise方法将异步actions动作操作内容进行Promise形式的返回，而Promise中只需要利用resolve、reject将成功与失败内容进行解析或弹射处理即可。
+异步操作 actions 主要是对 mutations 进行 commit 提交操作，因为不建议在 mutations 层进行异步处理，所以可以在 actions 层先进行异步功能，然后需要修改数据的时候将数据通过 payload 的参数形式 commit 到 mutations 的修改数据方法中，所以 actions 中的 asyncMultiIncrement 方法中主要参数包括了 context 上下文以及 payload 有效载荷参数，context 上下文对象中包含 commit、dispatch、getters、rootGetters、rootState、state 等方法与属性，那么就可以利用 context.commit 进行 multiIncrement 这一 mutations 方法的提交，并且将 payload 作为参数一同传递。至于 asyncMultiDecrement 这个 actions 动作中可以直接将 commit 方法从 context 中解构，并且利用 return new Promise 方法将异步 actions 动作操作内容进行 Promise 形式的返回，而 Promise 中只需要利用 resolve、reject 将成功与失败内容进行解析或弹射处理即可。
 
-到止vuex仓库的功能内容就根据目标进行了设定，不过目前这个数据仓库与 vue 项目还无关联，需要利用 use 的插件使用语法操作将 vue 与 vuex 的 store 仓库建立起对应关系，这样 store 才能在 vue 项目中起到它的作用。
+到止 vuex 仓库的功能内容就根据目标进行了设定，不过目前这个数据仓库与 vue 项目还无关联，需要利用 use 的插件使用语法操作将 vue 与 vuex 的 store 仓库建立起对应关系，这样 store 才能在 vue 项目中起到它的作用。
 
 main.js
 
 ```js {2-7,9-10}
-import { createApp } from 'vue';
-import { createStore } from 'vuex';
+import { createApp } from "vue";
+import { createStore } from "vuex";
 // 利用createStore创建唯一的store仓库实例
 const store = createStore({
   // 设置状态state
@@ -189,7 +189,7 @@ const store = createStore({
       // context上下文对象中包含commit、dispatch、getters、rootGetters、rootState、state等方法与属性
       setTimeout(() => {
         // 直接传递payload数值
-        context.commit('multiIncrement', payload);
+        context.commit("multiIncrement", payload);
       }, 2000);
     },
     // 直接利用解构方式将commit方法从context中获取
@@ -198,31 +198,31 @@ const store = createStore({
       return new Promise((resolve, reject) => {
         setTimeout(() => {
           // 直接传递payload对象
-          commit('multiDecrement', payload);
+          commit("multiDecrement", payload);
           // 利用resolve返回成功执行结果
           resolve({
             code: 200,
-            message: 'actions异步操作成功',
+            message: "actions异步操作成功",
           });
         }, 1000);
       });
     },
   },
 });
-import App from './App.vue';
+import App from "./App.vue";
 // 将store以插件形式与vue项目进行衔接
-createApp(App).use(store).mount('#app');
+createApp(App).use(store).mount("#app");
 ```
 
-因为 vuex 的 store 数据仓库已经建立并与当前的 vue 项目衔接完毕，那么就意味着在当前项目的任何一个层次的页面或者组件中都可以进行 store 仓库中 state 数据的获取与渲染显示操作。假设想在 Child2.vue 这个子组件中显示 store 仓库中的 count 状态值，那么可以尝试直接在组件的template模板层进行 {{store.state.count}}仓库state状态值对象属性count的渲染处理。如果想通过getters获取2倍state.count状态值，那么需要先引入 useStore 这个 vuex 提供的 hook 钩子利用它获取当前 store 仓库实例，利用vue的computed计算属性功能可以直接将store.getters.multiCount值进行计算结果值的返回，并将计算结果值声明成doubleCount变量直接在template模板层进行数据渲染即可。
+因为 vuex 的 store 数据仓库已经建立并与当前的 vue 项目衔接完毕，那么就意味着在当前项目的任何一个层次的页面或者组件中都可以进行 store 仓库中 state 数据的获取与渲染显示操作。假设想在 Child2.vue 这个子组件中显示 store 仓库中的 count 状态值，那么可以尝试直接在组件的 template 模板层进行 `{ { store.state.count } } `仓库 state 状态值对象属性 count 的渲染处理。如果想通过 getters 获取 2 倍 state.count 状态值，那么需要先引入 useStore 这个 vuex 提供的 hook 钩子利用它获取当前 store 仓库实例，利用 vue 的 computed 计算属性功能可以直接将 store.getters.multiCount 值进行计算结果值的返回，并将计算结果值声明成 doubleCount 变量直接在 template 模板层进行数据渲染即可。
 
 components/Child2.vue
 
 ```vue
 <script setup>
-import { computed } from 'vue';
+import { computed } from "vue";
 // 引入useStore这个vuex提供的hook钩子
-import { useStore } from 'vuex';
+import { useStore } from "vuex";
 // 获取当前store仓库实例
 const store = useStore();
 // 通过getters获取store仓库中的状态值multiCount
@@ -240,31 +240,31 @@ const doubleCount = computed(() => store.getters.multiCount);
 </template>
 ```
 
-state状态与getters数据获取操作在Child2.vue组件中都得以了应用，那么mutations与actions层次的操作可以放置到Grandson孙级组件中，以确认store仓库可以在任意层次组件中进行仓库内容的操作。
+state 状态与 getters 数据获取操作在 Child2.vue 组件中都得以了应用，那么 mutations 与 actions 层次的操作可以放置到 Grandson 孙级组件中，以确认 store 仓库可以在任意层次组件中进行仓库内容的操作。
 
-在引入useStore这个vuex提供的hook钩子以后进行仓库的实例化处理，可以直接从useStore仓库实例对象中解构commit、dispatch等方法以便后续提交与派发操作。对于原来仓库中定义的mutations方法可以直接通过commit提交，可以不传递参数直接提交，但假若mutations的修改state方法里有payload参数的话，commit提交操作时也是可以传递参数的。
+在引入 useStore 这个 vuex 提供的 hook 钩子以后进行仓库的实例化处理，可以直接从 useStore 仓库实例对象中解构 commit、dispatch 等方法以便后续提交与派发操作。对于原来仓库中定义的 mutations 方法可以直接通过 commit 提交，可以不传递参数直接提交，但假若 mutations 的修改 state 方法里有 payload 参数的话，commit 提交操作时也是可以传递参数的。
 
-如果理解了mutations的commit提交流程，那么actions的动作派发处理就如出一辙了，只不过在dispatch方法的时候可以传递参数，比如` dispatch('asyncMultiIncrement', 5);`在派发了asyncMultiIncrement的actions动作以后还传递了数值型参数5，`dispatch('asyncMultiDecrement', {step: 5})`在派发了asyncMultiDecrement的actions动作以后则传递了对象型参数`{step:5}`。因为asyncMultiDecrement这个actions动作函数在定义的时候进行了return new Promise的返回处理，所以组件中除了dispatch动作派发还可以将dispatch派发的结果值进行Promise的方式进行返回，当前则利用async、await的方法进行result结果值的获取。
+如果理解了 mutations 的 commit 提交流程，那么 actions 的动作派发处理就如出一辙了，只不过在 dispatch 方法的时候可以传递参数，比如` dispatch('asyncMultiIncrement', 5);`在派发了 asyncMultiIncrement 的 actions 动作以后还传递了数值型参数 5，`dispatch('asyncMultiDecrement', {step: 5})`在派发了 asyncMultiDecrement 的 actions 动作以后则传递了对象型参数`{step:5}`。因为 asyncMultiDecrement 这个 actions 动作函数在定义的时候进行了 return new Promise 的返回处理，所以组件中除了 dispatch 动作派发还可以将 dispatch 派发的结果值进行 Promise 的方式进行返回，当前则利用 async、await 的方法进行 result 结果值的获取。
 
 components/Grandson.vue
 
 ```vue
 <script setup>
 // 引入useStore这个vuex提供的hook钩子
-import { useStore } from 'vuex';
+import { useStore } from "vuex";
 // 获取当前store仓库实例，解构commit与dispatch方法
 const { commit, dispatch } = useStore();
 // 定义一个方法，用于提交mutation
 const increment = () => {
-  commit('increment');
+  commit("increment");
 };
 // 定义一个方法，用于派发action，传递数值参数
 const multiIncrement = () => {
-  dispatch('asyncMultiIncrement', 5);
+  dispatch("asyncMultiIncrement", 5);
 };
 // 定义一个方法，用于派发action，传递对象参数，并且获取action返回的Promise结果
 const asyncMultiDecrement = async () => {
-  const result = await dispatch('asyncMultiDecrement', {
+  const result = await dispatch("asyncMultiDecrement", {
     step: 5,
   });
   console.log(result);
@@ -287,6 +287,6 @@ const asyncMultiDecrement = async () => {
 </template>
 ```
 
- 现在项目运行的结果已经成功的将vuex仓库内容在各个不同的层次组件中进行了渲染与调用操作，对于vuex的基础功能也进行了全面的掌握与了解。
+现在项目运行的结果已经成功的将 vuex 仓库内容在各个不同的层次组件中进行了渲染与调用操作，对于 vuex 的基础功能也进行了全面的掌握与了解。
 
 ![image-20221119091138586](http://qn.chinavanes.com/qiniu_picGo/image-20221119091138586.png)

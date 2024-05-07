@@ -4,6 +4,8 @@
 .pnp.js
 .lh
 .vscode
+.vitepress/dist
+dist
 # testing
 /coverage
 

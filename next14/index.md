@@ -4,7 +4,7 @@ aside: false
 
 # NextJs 起步教程
 
-![NextJs](/images/nextjs14.png)
+![NextJs](/public/nextjs14.png)
 
 "NextJS14 起步教程"知识频道是一站式的学习资源，专为想要掌握或加深对 Next.js 14 版本理解的开发者设计。这个系列深入浅出地覆盖了从 Next.js 基本概念、环境搭建到高级功能应用的全方位内容，为用户构建高性能 React 应用打下坚实基础。
 

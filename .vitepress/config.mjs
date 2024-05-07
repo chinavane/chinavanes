@@ -16,6 +16,7 @@ import {
 import { defineConfig } from "vitepress";
 
 export default defineConfig({
+  ignoreDeadLinks: true,
   markdown: {
     lineNumbers: true,
   },

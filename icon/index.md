@@ -4,7 +4,7 @@ aside: false
 
 # 图标发展史
 
-![图标发展史](/images/icon-history.jpg)
+![图标发展史](/public/icon-history.jpg)
 
 本知识频道专注于前端图标技术的演进与实践应用，旨在为前端开发者提供图标设计与集成的全面指南。以下是频道内容的概览：
 
