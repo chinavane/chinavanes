@@ -5,8 +5,8 @@ export const module1 = {
   collapsed: true,
   items: [
     {
-      text: "01.欢迎加入课程",
-      link: "01.欢迎加入课程",
+      text: "01.加入课程",
+      link: "01.加入课程",
     },
     {
       text: "02.什么是Nodejs",
