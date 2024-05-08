@@ -610,7 +610,7 @@ export const module10 = {
 };
 
 export const module11 = {
-  text: "第11章 Sequelize入门与实践",
+  text: "第11章 Sequelize入门实践",
   base: "/nodejs/module-11/",
   collapsed: true,
   items: [
@@ -710,7 +710,7 @@ export const module11 = {
 };
 
 export const module12 = {
-  text: "第12章 MongoDB入门与应用",
+  text: "第12章 MongoDB入门应用",
   base: "/nodejs/module-12/",
   collapsed: true,
   items: [
@@ -806,7 +806,7 @@ export const module12 = {
 };
 
 export const module13 = {
-  text: "第13章 Mongoose入门与实践",
+  text: "第13章 Mongoose入门实践",
   base: "/nodejs/module-13/",
   collapsed: true,
   items: [
