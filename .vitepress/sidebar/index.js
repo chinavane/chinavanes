@@ -10,3 +10,4 @@ export { default as Upload } from "./upload";
 export { default as EsLint } from "./eslint";
 export { default as Sass } from "./sass";
 export { default as Next14 } from "./next14";
+export { default as Interview } from "./interview";

@@ -2,6 +2,7 @@ import {
   EsLint,
   ExportData,
   Icon,
+  Interview,
   Jsdoc,
   Mysql,
   Next14,
@@ -58,6 +59,10 @@ export default defineConfig({
         ],
       },
       {
+        text: "面试精讲系列教程",
+        items: [{ text: "如何进行更好的面试回复", link: "/interview/" }],
+      },
+      {
         text: "全系列教程",
         items: [
           { text: "React2024全系列教程", link: "/react2024/" },
@@ -79,6 +84,7 @@ export default defineConfig({
       "/eslint/": EsLint,
       "/sass/": Sass,
       "/next14/": Next14,
+      "/interview/": Interview,
     },
   },
 });
