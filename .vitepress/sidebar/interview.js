@@ -597,10 +597,43 @@ export const performanceInterview = {
   ],
 };
 
+export const WebWorkerInterview = {
+  text: "web-worker面试",
+  base: "/interview/web-worker-interview/",
+  collapsed: true,
+  items: [
+    {
+      text: "01.Web Worker的快速理解与简单应用",
+      link: "01.Web Worker的快速理解与简单应用",
+    },
+    {
+      text: "02.Shared Worker的快速理解与简单应用",
+      link: "02.Shared Worker的快速理解与简单应用",
+    },
+    {
+      text: "03.客户端读取并显示XLXS文件",
+      link: "03.客户端读取并显示XLXS文件",
+    },
+    {
+      text: "04.本地读取Excel文件并进行数据压缩传递到服务器",
+      link: "04.本地读取Excel文件并进行数据压缩传递到服务器",
+    },
+    {
+      text: "05.对读取的Excel文件数据进行拆分并发请求发送到后端服务器",
+      link: "05.对读取的Excel文件数据进行拆分并发请求发送到后端服务器",
+    },
+    {
+      text: "06.利用Web worker对读取Excel进行拆分并发请求进行性能优化",
+      link: "06.利用Web worker对读取Excel进行拆分并发请求进行性能优化",
+    },
+  ],
+};
+
 export default [
   projectInterview,
   vueInterview,
   reactInterview,
   performanceInterview,
   typescriptInterview,
+  WebWorkerInterview,
 ];
