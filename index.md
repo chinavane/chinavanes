@@ -20,9 +20,6 @@ hero:
     - theme: brand
       text: 关于我，子心
       link: /about-me
-    - theme: alt
-      text: 我的项目
-      link: /projects
 
 features:
   - icon:
@@ -86,14 +83,4 @@ features:
     title: 图标发展史起步教程(免费)
     details: 《图标发展史起步教程》介绍各种不同的图标类型，包括精灵图标、字体图标、SVG图标等内容，目标是能够利用图标进行UI设计与网络应用开发。
     link: /icon/
-  - icon:
-      src: /console.png
-    title: Console调试起步教程(免费)
-    details: 《Console调试起步教程》介绍Console调试的各种技巧，包括Console的log、warn、error、info、dir、time、timeEnd等内容，目标是能够利用Console进行前端调试。
-    link: /console/
-  - icon:
-      src: /frontend.png
-    title: 怒喷前端(免费)
-    details: 怒喷前端是对互联网中各种问题进行抨击，包括前端、后端、运维、产品、设计等方方面面，目标是能够让互联网更加美好。
-    link: /frontend/
 ---
